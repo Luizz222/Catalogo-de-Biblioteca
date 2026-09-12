@@ -42,7 +42,7 @@ void exibirMenuUsuarios();
 void exibirMenuEmprestimos();
 
 /*=========================================================
-    Função para exibir o sub-menu Gerenciar Consultas
+    Função para exibir o sub-menu Consultas
     Parametros:
         Nada
   =========================================================*/
