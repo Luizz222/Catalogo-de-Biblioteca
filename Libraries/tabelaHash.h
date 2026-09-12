@@ -1,3 +1,4 @@
+#include "biblioteca.h"
 #ifndef TABELAHASH_H
 #define TABELAHASH_H
 
@@ -7,7 +8,7 @@
 
 typedef struct TNo {
     char chave[TAM_CHAVE];
-    int dado;
+    TLivro livro;
     struct TNo *proximo;
 } TNo;
 
