@@ -42,7 +42,7 @@ unsigned int hash(const char * chave);
         2 - chave - ponteiro para a chave
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, int valor);
+void inserir(TabelaHash * const tabela, const char *chave, TLivro livro);
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
