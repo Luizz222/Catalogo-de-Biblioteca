@@ -1,7 +1,8 @@
-#include "biblioteca.h"
-#include "tabelaHash.h"
+#include "../Libraries/biblioteca.h"
+#include "../Libraries/tabelaHash.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*=========================================================
     Função para criar uma tabela hash
@@ -41,7 +42,7 @@ unsigned int hash(const char *chave) {
         2 - chave - ponteiro para a chave
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, int valor) {
+void inserir(TabelaHash * const tabela, const char *chave,TLivro livro) {
     unsigned int posicao = hash(chave);
 
     TNo *novo = malloc(sizeof(TNo));
@@ -49,12 +50,12 @@ void inserir(TabelaHash * const tabela, const char *chave, int valor) {
 
     strncpy(novo->chave, chave, sizeof(novo->chave) - 1);
     novo->chave[sizeof(novo->chave) - 1] = '\0';
-    novo->dado = valor;
+    novo->livro = livro;
 
     novo->proximo = tabela->gavetas[posicao];
     tabela->gavetas[posicao] = novo;
 
-    printf("Inserido: \"%s\" -> %d na gaveta %u\n", chave, valor, posicao);
+    printf("Inserido: \"%s\" -> %s na gaveta %u\n", chave, livro.titulo, posicao);
 }
 
 /*=========================================================
