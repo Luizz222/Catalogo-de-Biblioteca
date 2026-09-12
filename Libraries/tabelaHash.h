@@ -1,3 +1,4 @@
+#include "biblioteca.h"
 #ifndef TABELAHASH_H
 #define TABELAHASH_H
 
@@ -7,7 +8,7 @@
 
 typedef struct TNo {
     char chave[TAM_CHAVE];
-    int dado;
+    TLivro livro;
     struct TNo *proximo;
 } TNo;
 
@@ -41,7 +42,7 @@ unsigned int hash(const char * chave);
         2 - chave - ponteiro para a chave
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, int valor);
+void inserir(TabelaHash * const tabela, const char *chave, TLivro livro);
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
@@ -59,5 +60,21 @@ void verificarMallocNO(TNo const * const no);
         1 - tabela - ponteiro retornado pela alocação dinâmica
   =========================================================*/
 void verificarMallocTABELA(TabelaHash const * const tabela);
+
+/*=========================================================
+    Função para buscar por Isbn
+    Parametros:
+        1 - tabela 
+        2 - ponteiro constante da chave ISBN
+  =========================================================*/
+TLivro* buscarPorIsbn(TabelaHash *tabela, const char *isbn);
+
+/*=========================================================
+    Função para buscar por Título
+    Parametros:
+        1 - tabela 
+        2 - ponteiro apontando para o titulo
+  =========================================================*/
+void buscarPorTitulo(TabelaHash *tabela, const char *titulo);
 
 #endif
