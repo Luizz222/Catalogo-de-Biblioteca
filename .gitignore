@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# CLion e CMake (Específico para o seu projeto)
+cmake-build-*/
+.idea/
+*.cbp
