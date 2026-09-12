@@ -3,6 +3,8 @@ project(CatalogoBiblioteca C)
 
 set(CMAKE_C_STANDARD 11)
 
+include_directories(Libraries)
+
 add_executable(CatalogoBiblioteca src/main.c
         Libraries/Livro.h
         Libraries/TabelaHash.h
