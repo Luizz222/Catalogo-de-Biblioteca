@@ -1,3 +1,0 @@
-C:/Users/Luiz Flávio/OneDrive/Área de Trabalho/CatalogoBiblioteca/cmake-build-debug/CMakeFiles/CatalogoBiblioteca.dir
-C:/Users/Luiz Flávio/OneDrive/Área de Trabalho/CatalogoBiblioteca/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Luiz Flávio/OneDrive/Área de Trabalho/CatalogoBiblioteca/cmake-build-debug/CMakeFiles/rebuild_cache.dir
