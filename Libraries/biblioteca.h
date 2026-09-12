@@ -13,6 +13,47 @@ typedef struct Livro{
     int disponibilidade;
 }TLivro;
 
+/*=========================================================
+    Função para exibir o menu principal da biblioteca
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuBiblioteca();
+
+/*=========================================================
+    Função para exibir o sub-menu Gerenciar Livros
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuLivros();
+
+/*=========================================================
+    Função para exibir o sub-menu Gerenciar Usuários
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuUsuarios();
+
+/*=========================================================
+    Função para exibir o sub-menu Gerenciar Empréstimos
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuEmprestimos();
+
+/*=========================================================
+    Função para exibir o sub-menu Gerenciar Consultas
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuConsultas();
+
+/*=========================================================
+    Função para exibir o sub-menu Relatorios
+    Parametros:
+        Nada
+  =========================================================*/
+void exibirMenuRelatorios();
 
 
 #endif
