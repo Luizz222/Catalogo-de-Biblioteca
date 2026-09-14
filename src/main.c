@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "biblioteca.h"
-#include "tabelaHash.h"
+#include <stdlib.h>
+#include "../Libraries/biblioteca.h"
+#include "../Libraries/tabelaHash.h"
 int main(void){
     TabelaHash *tabelaLivros = criar_tabela();
 
@@ -34,7 +35,7 @@ int main(void){
 
         case 0:
             printf("\nEncerrando o programa...\n");
-            break;
+            exit(0);
 
         default:
             printf("\nOpcao invalida!\n");

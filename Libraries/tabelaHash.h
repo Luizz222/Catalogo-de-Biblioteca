@@ -1,4 +1,4 @@
-#include "biblioteca.h"
+#include "../Libraries/biblioteca.h"
 #ifndef TABELAHASH_H
 #define TABELAHASH_H
 

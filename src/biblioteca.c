@@ -1,5 +1,5 @@
-#include "biblioteca.h"
-#include "tabelaHash.h"
+#include "../Libraries/biblioteca.h"
+#include "../Libraries/tabelaHash.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

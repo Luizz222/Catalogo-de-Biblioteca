@@ -5,6 +5,8 @@
 #define TAM_AUTOR 50
 #define TAM_ISBN 15
 
+typedef struct TabelaHash TabelaHash;
+
 typedef struct Livro{
     char isbn[TAM_ISBN];
     char titulo[TAM_TITULO];
