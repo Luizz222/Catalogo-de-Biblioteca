@@ -23,9 +23,9 @@ void exibirMenuBiblioteca();
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Livros
     Parametros:
-        Nada
+        1 - Ponteiro para a tabela hash
   =========================================================*/
-void exibirMenuLivros(TabelaHash * const tabelaLivros);
+void exibirMenuLivros(TabelaHash * const tabela);
 
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Usuários
