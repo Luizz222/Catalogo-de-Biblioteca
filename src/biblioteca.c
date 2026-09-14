@@ -225,7 +225,7 @@ void exibirMenuConsultas(){
     Parametros:
         Nada
   =========================================================*/
-void exibirMenuRelatorios(){
+void exibirMenuRelatorios(TabelaHash const * const tabela){
     int opcao = -1;
 
     printf("\n================== RELATORIOS ==================\n");
@@ -241,7 +241,7 @@ void exibirMenuRelatorios(){
     getchar();
     switch(opcao){
     case 1:
-        
+        listarTodosLivros(tabela);
         break;
     
     case 2:
@@ -269,5 +269,37 @@ void exibirMenuRelatorios(){
 
     default:
         printf("\nOpcao invalida!\n");
+    }
+}
+
+/*=========================================================
+    Função para listar todos os livros cadastrados
+    Parametros:
+        1 - tabela - ponteiro para a tabela hash
+    Retorno:
+        Nada
+  =========================================================*/
+void listarTodosLivros(TabelaHash const * const tabela){
+    int i = 0;
+    TNo *atual;
+    printf("\n================== TODOS OS LIVROS ==================\n");
+
+    for(i = 0; i < TAM_TABELA; i++){
+        atual = tabela->gavetas[i];
+
+        while(atual != NULL){
+            printf("\nISBN: %s\n", atual->livro.isbn);
+            printf("Titulo: %s\n", atual->livro.titulo);
+            printf("Autor: %s\n", atual->livro.autor);
+            printf("Ano de publicacao: %s\n", atual->livro.anoPublicacao);
+
+            if(atual->livro.disponibilidade == 1){
+                printf("Disponibilidade: Disponivel\n");
+            }else{
+                printf("Disponibilidade: Emprestado\n");
+            }
+
+            atual = atual->proximo;
+        }
     }
 }

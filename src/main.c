@@ -30,7 +30,7 @@ int main(void){
             break;
 
         case 5:
-            exibirMenuRelatorios();
+            exibirMenuRelatorios(tabelaLivros);
             break;
 
         case 0:

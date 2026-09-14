@@ -55,7 +55,8 @@ void exibirMenuConsultas();
     Parametros:
         Nada
   =========================================================*/
-void exibirMenuRelatorios();
+void exibirMenuRelatorios(TabelaHash const * const tabela);
 
+void listarTodosLivros(TabelaHash const * const tabela);
 
 #endif
