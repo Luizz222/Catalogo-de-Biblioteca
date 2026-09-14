@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "biblioteca.h"
+#include "tabelaHash.h"
 int main(void){
+    TabelaHash *tabelaLivros = criar_tabela();
 
     do{
         int opcao = -1;
@@ -11,7 +13,7 @@ int main(void){
 
         switch (opcao) {
         case 1:
-            exibirMenuLivros();
+            exibirMenuLivros(tabelaLivros);
             break;
 
         case 2:
@@ -28,6 +30,7 @@ int main(void){
 
         case 5:
             exibirMenuRelatorios();
+            break;
 
         case 0:
             printf("\nEncerrando o programa...\n");
@@ -35,7 +38,6 @@ int main(void){
 
         default:
             printf("\nOpcao invalida!\n");
-            break;
         }
     }while(1);
 }

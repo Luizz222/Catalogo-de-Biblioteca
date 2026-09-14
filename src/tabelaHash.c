@@ -1,5 +1,5 @@
-#include "../Libraries/biblioteca.h"
-#include "../Libraries/tabelaHash.h"
+#include "biblioteca.h"
+#include "tabelaHash.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,7 +42,7 @@ unsigned int hash(const char *chave) {
         2 - chave - ponteiro para a chave
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave,TLivro livro) {
+void inserir(TabelaHash * const tabela, const char *chave, TLivro livro) {
     unsigned int posicao = hash(chave);
 
     TNo *novo = malloc(sizeof(TNo));

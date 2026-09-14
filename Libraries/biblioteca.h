@@ -9,7 +9,7 @@ typedef struct Livro{
     char isbn[TAM_ISBN];
     char titulo[TAM_TITULO];
     char autor[TAM_AUTOR];
-    char anoPublicacao[4];
+    char anoPublicacao[5];
     int disponibilidade;
 }TLivro;
 
@@ -25,7 +25,7 @@ void exibirMenuBiblioteca();
     Parametros:
         Nada
   =========================================================*/
-void exibirMenuLivros();
+void exibirMenuLivros(TabelaHash * const tabelaLivros);
 
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Usuários
