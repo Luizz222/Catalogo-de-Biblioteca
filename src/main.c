@@ -7,10 +7,11 @@ int main(void){
 
     do{
         int opcao = -1;
+        
         exibirMenuBiblioteca();
-
-        printf("Opcao: ");
         scanf("%d", &opcao);
+        getchar();
+        printf("\n");
 
         switch (opcao) {
         case 1:
@@ -26,7 +27,7 @@ int main(void){
             break;
         
         case 4:
-            exibirMenuConsultas();
+            exibirMenuConsultas(tabelaLivros);
             break;
 
         case 5:

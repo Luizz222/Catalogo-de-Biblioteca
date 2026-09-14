@@ -48,7 +48,7 @@ void exibirMenuEmprestimos();
     Parametros:
         Nada
   =========================================================*/
-void exibirMenuConsultas();
+void exibirMenuConsultas(TabelaHash * const tabela);
 
 /*=========================================================
     Função para exibir o sub-menu Relatorios

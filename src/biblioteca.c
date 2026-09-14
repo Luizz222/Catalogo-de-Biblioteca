@@ -13,11 +13,12 @@ void exibirMenuBiblioteca(){
     printf("\n================== MENU BIBLIOTECA ==================\n");
     printf("1. Gerenciar Livros\n");
     printf("2. Gerenciar Usuarios\n");
-    printf("3. Gerenciar Empréetimos\n");
-    printf("4. Realizar Consulta\n");
+    printf("3. Gerenciar Emprestimos\n");
+    printf("4. Realizar Consulta de Livros\n");
     printf("5. Relatorios\n\n");
 
     printf("0. Encerrar o Programa\n\n");
+    printf("Escolha uma opcao: ");
 }
 
 /*=========================================================
@@ -35,8 +36,11 @@ void exibirMenuLivros(TabelaHash * const tabela){
     printf("4. Listar Livros\n\n");
 
     printf("0. Voltar\n\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     getchar();
+    printf("\n");
+
     switch(opcao){
 
     case 1:
@@ -103,8 +107,11 @@ void exibirMenuUsuarios(){
     printf("4. Listar Usuarios\n\n");
 
     printf("0. Voltar\n\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     getchar();
+    printf("\n");
+
     switch(opcao){
     case 1:
         
@@ -138,15 +145,18 @@ void exibirMenuUsuarios(){
 void exibirMenuEmprestimos(){
     int opcao = -1;
 
-    printf("\n================== MENU EMPRESTIMOS ==================\n");
+    printf("\n================== GERENCIAR EMPRESTIMOS ==================\n");
     printf("1. Realizar Emprestimo\n");
     printf("2. Realizar Devolucao\n");
     printf("3. Consultar Emprestimos Ativos\n");
     printf("4. Consultar Historico de Emprestimos\n\n");
 
     printf("0. Voltar\n\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     getchar();
+    printf("\n");
+
     switch(opcao){
     case 1:
         
@@ -177,40 +187,45 @@ void exibirMenuEmprestimos(){
     Parametros:
         Nada
   =========================================================*/
-void exibirMenuConsultas(){
+void exibirMenuConsultas(TabelaHash * const tabela){
     int opcao = -1;
 
-    printf("\n=============== CONSULTAR LIVROS ===============\n");
+    printf("\n=============== CONSULTAS ===============\n");
     printf("1. Buscar por ISBN\n");
     printf("2. Buscar por Titulo\n");
-    printf("3. Buscar por Autor\n");
-    printf("4. Mostrar Livros Disponiveis\n");
-    printf("5. Mostrar Livros Emprestados\n\n");
+    printf("3. Buscar por Autor\n\n");
 
     printf("0. Voltar\n\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     getchar();
+    printf("\n");
+
     switch(opcao){
     case 1:
-        
+        char isbn[TAM_ISBN];
+        printf("Digite o ISBN do livro: ");
+        fgets(isbn, TAM_ISBN, stdin);
+        isbn[strcspn(isbn, "\n")] = '\0';
+        buscarPorIsbn(tabela, isbn);
         break;
 
     case 2:
-        
+        char titulo[TAM_TITULO];
+        printf("Digite o titulo do livro: ");
+        fgets(titulo, TAM_TITULO, stdin);
+        titulo[strcspn(titulo, "\n")] = '\0';
+        buscarPorTitulo(tabela, titulo);
         break;
 
     case 3:
-        
+        char autor[TAM_AUTOR];
+        printf("Digite o nome do(a) autor(a) do livro: ");
+        fgets(autor, TAM_AUTOR, stdin);
+        autor[strcspn(autor, "\n")] = '\0';
+        buscarPorAutor(tabela, autor);
         break;
 
-    case 4:
-        
-        break;
-
-    case 5:
-        
-        break;
-    
     case 0:
     printf("Retornando..\n");
     return;
@@ -237,8 +252,11 @@ void exibirMenuRelatorios(){
     printf("6. Listar Livros Emprestados\n\n");
 
     printf("0. Voltar\n\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     getchar();
+    printf("\n");
+
     switch(opcao){
     case 1:
         
@@ -271,3 +289,4 @@ void exibirMenuRelatorios(){
         printf("\nOpcao invalida!\n");
     }
 }
+

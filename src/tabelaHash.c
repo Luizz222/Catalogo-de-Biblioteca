@@ -83,3 +83,114 @@ void verificarMallocTABELA(TabelaHash const * const tabela){
         exit(1);
     }
 }
+
+/*=========================================================
+ Função para buscar um livro por ISBN na Tabela Hash
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - string com o ISBN procurado
+ =========================================================*/
+void buscarPorIsbn(TabelaHash const * const tabela, const char *isbn){
+    unsigned int posicao = hash(isbn);
+    TNo *atual = tabela->gavetas[posicao];
+
+    printf("\n--- Resultado da Busca por ISBN: \"%s\" ---\n\n", isbn);
+
+    while (atual != NULL) {
+        if(strcmp(atual->livro.isbn, isbn) == 0){
+            printf("_________________________________________________________");
+            printf("______________________________________\n\n");
+            printf("ISBN: %s | Título: %s | Autor: %s | Ano: %s | Status: %s\n",
+                   atual->livro.isbn,
+                   atual->livro.titulo,
+                   atual->livro.autor,
+                   atual->livro.anoPublicacao,
+                   atual->livro.disponibilidade ? "Disponível" : "Emprestado");
+            printf("_________________________________________________________");
+            printf("______________________________________\n");
+            return;
+        }
+
+        atual = atual->proximo;
+    }
+
+    printf("Nenhum livro encontrado com o ISBN informado.\n");
+}
+
+/*=========================================================
+ Função para buscar livros por Título (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - titulo - string com o título (ou parte dele) procurado
+ =========================================================*/
+void buscarPorTitulo(TabelaHash const * const tabela, const char *titulo) {
+    int encontrados = 0;
+    printf("\n--- Resultados da Busca por Título: \"%s\" ---\n\n", titulo);
+
+    for (int i = 0; i < TAM_TABELA; i++) {
+        TNo *atual = tabela->gavetas[i];
+        while (atual != NULL) {
+            // strstr verifica se o título procurado está contido no livro cadastrado
+            if (strstr(atual->livro.titulo, titulo) != NULL) {
+                printf("_________________________________________________________");
+                printf("______________________________________\n\n");
+                printf("ISBN: %s | Título: %s | Autor: %s | Ano: %s | Status: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao,
+                       atual->livro.disponibilidade ? "Disponível" : "Emprestado"
+                );
+
+                printf("_________________________________________________________");
+                printf("______________________________________\n");
+                encontrados++;
+            }
+            atual = atual->proximo;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro encontrado com esse título.\n");
+    }
+}
+
+/*=========================================================
+ Função para buscar livros por Autor (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - autor - string com o autor (ou parte dele) procurado
+ =========================================================*/
+void buscarPorAutor(TabelaHash const * const tabela, const char *autor){
+    int encontrados = 0;
+
+    printf("\n--- Resultados da Busca por Autor: \"%s\" ---\n\n", autor);
+
+    for(int i = 0; i < TAM_TABELA; i++){
+        TNo *atual = tabela->gavetas[i];
+
+        while(atual != NULL){
+            // strstr verifica se o autor procurado está contido no autor cadastrado
+            if(strstr(atual->livro.autor, autor) != NULL){
+                printf("_________________________________________________________");
+                printf("______________________________________\n\n");
+                printf("ISBN: %s | Título: %s | Autor: %s | Ano: %s | Status: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao,
+                       atual->livro.disponibilidade ? "Disponível" : "Emprestado");
+                printf("_________________________________________________________");
+                printf("______________________________________\n");
+
+                encontrados++;
+            }
+
+            atual = atual->proximo;
+        }
+    }
+
+    if(encontrados == 0){
+        printf("Nenhum livro encontrado para esse autor.\n");
+    }
+}

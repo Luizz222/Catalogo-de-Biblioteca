@@ -61,4 +61,28 @@ void verificarMallocNO(TNo const * const no);
   =========================================================*/
 void verificarMallocTABELA(TabelaHash const * const tabela);
 
+/*=========================================================
+ Função para buscar um livro por ISBN na Tabela Hash
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - string com o ISBN procurado
+ =========================================================*/
+void buscarPorIsbn(TabelaHash const * const tabela, const char *isbn);
+
+
+/*=========================================================
+ Função para buscar livros por Título (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - titulo - string com o título (ou parte dele) procurado
+ =========================================================*/
+void buscarPorTitulo(TabelaHash const * const tabela, const char *titulo);
+
+/*=========================================================
+ Função para buscar livros por Autor (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - autor - string com o autor (ou parte dele) procurado
+ =========================================================*/
+void buscarPorAutor(TabelaHash const * const tabela, const char *autor);
 #endif
