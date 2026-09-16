@@ -85,4 +85,11 @@ void buscarPorTitulo(TabelaHash const * const tabela, const char *titulo);
  2 - autor - string com o autor (ou parte dele) procurado
  =========================================================*/
 void buscarPorAutor(TabelaHash const * const tabela, const char *autor);
+
+/*=========================================================
+ Função para listar todos os livros contidos na tabela hash
+ Parâmetro:
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void listarLivro(TabelaHash *tabela);
 #endif

@@ -194,3 +194,27 @@ void buscarPorAutor(TabelaHash const * const tabela, const char *autor){
         printf("Nenhum livro encontrado para esse autor.\n");
     }
 }
+
+void listarLivro(TabelaHash *tabela) {
+
+    for (int i =0; i<TAM_TABELA;i++) {
+        TNo *atual = tabela->gavetas[i];
+
+        while (atual!=NULL) {
+            printf("_________________________________________________________");
+            printf("______________________________________\n\n");
+            printf("ISBN: %s | Título: %s | Autor: %s | Ano: %s | Status: %s\n",
+                   atual->livro.isbn,
+                   atual->livro.titulo,
+                   atual->livro.autor,
+                   atual->livro.anoPublicacao,
+                   atual->livro.disponibilidade ? "Disponível" : "Emprestado");
+            printf("_________________________________________________________");
+            printf("______________________________________\n");
+            atual = atual->proximo;
+        }
+
+
+    }
+
+}

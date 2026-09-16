@@ -79,7 +79,9 @@ void exibirMenuLivros(TabelaHash * const tabela){
         
         break;
     case 4:
-        
+
+        listarLivro(tabela);
+
         break;
 
     case 0:
