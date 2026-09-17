@@ -43,6 +43,7 @@ unsigned int hash(const char *chave) {
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
 void inserir(TabelaHash * const tabela, const char *chave, TLivro livro) {
+    TNo *i;
     unsigned int posicao = hash(chave);
 
     TNo *novo = malloc(sizeof(TNo));
@@ -52,9 +53,16 @@ void inserir(TabelaHash * const tabela, const char *chave, TLivro livro) {
     novo->chave[sizeof(novo->chave) - 1] = '\0';
     novo->livro = livro;
 
-    novo->proximo = tabela->gavetas[posicao];
-    tabela->gavetas[posicao] = novo;
-
+    if (tabela->gavetas[posicao] == NULL) {
+        tabela->gavetas[posicao] = novo;
+    }
+    else {
+        for (i = tabela->gavetas[posicao];i->proximo!=NULL;i=i->proximo);
+        i->proximo = novo;
+    }
+    novo->proximo = NULL;1
+    //novo->proximo = tabela->gavetas[posicao];
+    //tabela->gavetas[posicao] = novo;
     printf("Inserido: \"%s\" -> %s na gaveta %u\n", chave, livro.titulo, posicao);
 }
 
@@ -207,7 +215,7 @@ void listarLivro(TabelaHash *tabela) {
         if (atual == NULL) {
             cond++;
         }
-
+        printf("===================POSICAO %d ==================\n",i);
         while (atual!=NULL) {
             printf("_________________________________________________________");
             printf("______________________________________\n\n");
