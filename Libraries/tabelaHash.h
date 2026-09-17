@@ -92,4 +92,12 @@ void buscarPorAutor(TabelaHash const * const tabela, const char *autor);
  1 - tabela - ponteiro para a tabela hash
  ==========================================================*/
 void listarLivro(TabelaHash *tabela);
+
+/*=========================================================
+ Função para remover o livro de acordo com o isbn do proprio
+ Paramêtros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void removerLivro(TabelaHash *tabela, char *isbn);
 #endif

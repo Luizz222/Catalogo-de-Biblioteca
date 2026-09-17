@@ -76,10 +76,13 @@ void exibirMenuLivros(TabelaHash * const tabela){
         break;
 
     case 3:
-        
+        char isbn[15];
+        printf("Digite o isbn do livro que deseja excluir:\n");
+        scanf("%14s", isbn);
+        getchar();
+        removerLivro(tabela,isbn);
         break;
     case 4:
-
         listarLivro(tabela);
 
         break;

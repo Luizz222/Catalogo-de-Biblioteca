@@ -195,6 +195,11 @@ void buscarPorAutor(TabelaHash const * const tabela, const char *autor){
     }
 }
 
+/*=========================================================
+ Função para listar todos os livros contidos na tabela hash
+ Parâmetro:
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
 void listarLivro(TabelaHash *tabela) {
 
     for (int i =0; i<TAM_TABELA;i++) {
@@ -203,18 +208,55 @@ void listarLivro(TabelaHash *tabela) {
         while (atual!=NULL) {
             printf("_________________________________________________________");
             printf("______________________________________\n\n");
-            printf("ISBN: %s | Título: %s | Autor: %s | Ano: %s | Status: %s\n",
+            printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s | Status: %s\n",
                    atual->livro.isbn,
                    atual->livro.titulo,
                    atual->livro.autor,
                    atual->livro.anoPublicacao,
-                   atual->livro.disponibilidade ? "Disponível" : "Emprestado");
+                   atual->livro.disponibilidade ? "Disponivel" : "Emprestado");
             printf("_________________________________________________________");
             printf("______________________________________\n");
             atual = atual->proximo;
         }
-
-
     }
 
+}
+
+/*=========================================================
+ Função para remover o livro de acordo com o isbn do proprio
+ Paramêtros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void removerLivro(TabelaHash *tabela, char *isbn) {
+    if (isbn==NULL) {
+        printf("O ISBN não foi digitado");
+        return;;
+    }
+    int cond = 0;
+    unsigned int posicao = hash(isbn);
+    TNo *novo = tabela->gavetas[posicao];
+    TNo *anterior = NULL;
+
+    while (novo !=NULL) {
+
+        if (strcmp(novo->chave,isbn) == 0) {
+            if (anterior == NULL) {
+                tabela->gavetas[posicao] = novo->proximo;
+            }
+            else {
+                anterior->proximo = novo->proximo;
+            }
+            free(novo);
+            printf("Livro removido com sucesso!!!");
+            cond=1;
+            return;
+        }
+
+        anterior = novo;
+        novo = novo->proximo;
+    }
+    if (cond ==0) {
+        printf("O livro com esse ISBN nao existe");
+    }
 }
