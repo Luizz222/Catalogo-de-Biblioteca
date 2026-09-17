@@ -201,9 +201,12 @@ void buscarPorAutor(TabelaHash const * const tabela, const char *autor){
  1 - tabela - ponteiro para a tabela hash
  ==========================================================*/
 void listarLivro(TabelaHash *tabela) {
-
+    int cond=0;
     for (int i =0; i<TAM_TABELA;i++) {
         TNo *atual = tabela->gavetas[i];
+        if (atual == NULL) {
+            cond++;
+        }
 
         while (atual!=NULL) {
             printf("_________________________________________________________");
@@ -218,6 +221,9 @@ void listarLivro(TabelaHash *tabela) {
             printf("______________________________________\n");
             atual = atual->proximo;
         }
+    }
+    if (cond == 10) {
+        printf("Nao existe nenhum livro");
     }
 
 }
