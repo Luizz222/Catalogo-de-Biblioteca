@@ -60,7 +60,7 @@ void inserir(TabelaHash * const tabela, const char *chave, TLivro livro) {
         for (i = tabela->gavetas[posicao];i->proximo!=NULL;i=i->proximo);
         i->proximo = novo;
     }
-    novo->proximo = NULL;1
+    novo->proximo = NULL;
     //novo->proximo = tabela->gavetas[posicao];
     //tabela->gavetas[posicao] = novo;
     printf("Inserido: \"%s\" -> %s na gaveta %u\n", chave, livro.titulo, posicao);

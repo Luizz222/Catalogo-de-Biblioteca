@@ -31,9 +31,8 @@ void exibirMenuLivros(TabelaHash * const tabela){
 
     printf("\n=============== GERENCIAR LIVROS ===============\n");
     printf("1. Cadastrar Livro\n");
-    printf("2. Alterar Livro\n");
-    printf("3. Remover Livro\n");
-    printf("4. Listar Livros\n\n");
+    printf("2. Remover Livro\n");
+    printf("3. Listar Livros\n\n");
 
     printf("0. Voltar\n\n");
     printf("Escolha uma opcao: ");
@@ -70,19 +69,15 @@ void exibirMenuLivros(TabelaHash * const tabela){
 
         printf("\nLivro cadastrado com sucesso!\n");
         break;
-    
-    case 2:
-        
-        break;
 
-    case 3:
+    case 2:
         char isbn[15];
         printf("Digite o isbn do livro que deseja excluir:\n");
         scanf("%14s", isbn);
         getchar();
         removerLivro(tabela,isbn);
         break;
-    case 4:
+    case 3:
         listarLivro(tabela);
 
         break;
