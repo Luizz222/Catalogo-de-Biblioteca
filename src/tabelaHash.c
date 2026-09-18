@@ -1,7 +1,8 @@
-#include "biblioteca.h"
-#include "tabelaHash.h"
+#include "../Libraries/biblioteca.h"
+#include "../Libraries/tabelaHash.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*=========================================================
     Função para criar uma tabela hash
@@ -41,21 +42,38 @@ unsigned int hash(const char *chave) {
         2 - chave - ponteiro para a chave
         3 - valor - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, int valor) {
-    unsigned int posicao = hash(chave);
+void inserir(TabelaHash * const tabela, const char *isbn, TLivro livro) {
+
+    TNo *i;
+    unsigned int posicao = hash(isbn);
+
+    if (!verificarIsbn(tabela,isbn,livro,posicao )) {
+        printf("O ISBN nao pode ser digitado, ja pertence a outro livro");
+        return;
+    }
 
     TNo *novo = malloc(sizeof(TNo));
     verificarMallocNO(novo);
 
-    strncpy(novo->chave, chave, sizeof(novo->chave) - 1);
+    strncpy(novo->chave, isbn, sizeof(novo->chave) - 1);
     novo->chave[sizeof(novo->chave) - 1] = '\0';
-    novo->dado = valor;
+    novo->livro = livro;
 
-    novo->proximo = tabela->gavetas[posicao];
-    tabela->gavetas[posicao] = novo;
-
-    printf("Inserido: \"%s\" -> %d na gaveta %u\n", chave, valor, posicao);
+    if (tabela->gavetas[posicao] == NULL) {
+        tabela->gavetas[posicao] = novo;
+    }
+    else {
+        for (i = tabela->gavetas[posicao];i->proximo!=NULL;i=i->proximo);
+        i->proximo = novo;
+    }
+    novo->proximo = NULL;
+    //novo->proximo = tabela->gavetas[posicao];
+    //tabela->gavetas[posicao] = novo;
+    printf("Inserido: \"%s\" -> %s na gaveta %u\n", isbn, livro.titulo, posicao);
+    printf("\nLivro cadastrado com sucesso!\n");
 }
+
+
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
@@ -82,3 +100,217 @@ void verificarMallocTABELA(TabelaHash const * const tabela){
         exit(1);
     }
 }
+
+/*=========================================================
+ Função para buscar um livro por ISBN na Tabela Hash
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - string com o ISBN procurado
+ =========================================================*/
+void buscarPorIsbn(TabelaHash const * const tabela, const char *isbn){
+    int cont =0;
+    unsigned int posicao = hash(isbn);
+    TNo *atual = tabela->gavetas[posicao];
+
+    printf("\n--- Resultado da Busca por ISBN: \"%s\" ---\n\n", isbn);
+
+    while (atual != NULL) {
+        if(strcmp(atual->livro.isbn, isbn) == 0){
+            printf("_________________________________________________________");
+            printf("______________________________________\n\n");
+            printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s | Status: %s\n",
+                   atual->livro.isbn,
+                   atual->livro.titulo,
+                   atual->livro.autor,
+                   atual->livro.anoPublicacao,
+                   atual->livro.disponibilidade ? "Disponivel" : "Emprestado");
+            printf("_________________________________________________________");
+            printf("______________________________________\n");
+            cont++;
+        }
+
+        atual = atual->proximo;
+    }
+    if (cont==0) {
+        printf("Nenhum livro encontrado com o ISBN informado.\n");
+    }
+
+}
+
+/*=========================================================
+ Função para buscar livros por Título (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - titulo - string com o título (ou parte dele) procurado
+ =========================================================*/
+void buscarPorTitulo(TabelaHash const * const tabela, const char *titulo) {
+    int encontrados = 0;
+    printf("\n--- Resultados da Busca por Titulo: \"%s\" ---\n\n", titulo);
+
+    for (int i = 0; i < TAM_TABELA; i++) {
+        TNo *atual = tabela->gavetas[i];
+        while (atual != NULL) {
+            // strstr verifica se o título procurado está contido no livro cadastrado
+            if (strstr(atual->livro.titulo, titulo) != NULL) {
+                printf("_________________________________________________________");
+                printf("______________________________________\n\n");
+                printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s | Status: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao,
+                       atual->livro.disponibilidade ? "Disponivel" : "Emprestado"
+                );
+
+                printf("_________________________________________________________");
+                printf("______________________________________\n");
+                encontrados++;
+            }
+            atual = atual->proximo;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro encontrado com esse titulo.\n");
+    }
+}
+
+/*=========================================================
+ Função para buscar livros por Autor (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - autor - string com o autor (ou parte dele) procurado
+ =========================================================*/
+void buscarPorAutor(TabelaHash const * const tabela, const char *autor){
+    int encontrados = 0;
+
+    printf("\n--- Resultados da Busca por Autor: \"%s\" ---\n\n", autor);
+
+    for(int i = 0; i < TAM_TABELA; i++){
+        TNo *atual = tabela->gavetas[i];
+
+        while(atual != NULL){
+            // strstr verifica se o autor procurado está contido no autor cadastrado
+            if(strstr(atual->livro.autor, autor) != NULL){
+                printf("_________________________________________________________");
+                printf("______________________________________\n\n");
+                printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s | Status: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao,
+                       atual->livro.disponibilidade ? "Disponivel" : "Emprestado");
+                printf("_________________________________________________________");
+                printf("______________________________________\n");
+
+                encontrados++;
+            }
+
+            atual = atual->proximo;
+        }
+    }
+
+    if(encontrados == 0){
+        printf("Nenhum livro encontrado para esse autor.\n");
+    }
+}
+
+/*=========================================================
+ Função para listar todos os livros contidos na tabela hash
+ Parâmetro:
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void listarLivro(TabelaHash *tabela) {
+    int cond=0;
+    for (int i =0; i<TAM_TABELA;i++) {
+        TNo *atual = tabela->gavetas[i];
+        if (atual == NULL) {
+            cond++;
+        }
+        printf("===================POSICAO %d ==================\n",i);
+        while (atual!=NULL) {
+            printf("_________________________________________________________");
+            printf("______________________________________\n\n");
+            printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s | Status: %s\n",
+                   atual->livro.isbn,
+                   atual->livro.titulo,
+                   atual->livro.autor,
+                   atual->livro.anoPublicacao,
+                   atual->livro.disponibilidade ? "Disponivel" : "Emprestado");
+            printf("_________________________________________________________");
+            printf("______________________________________\n");
+            atual = atual->proximo;
+        }
+    }
+    if (cond == 10) {
+        printf("Nao existe nenhum livro");
+    }
+
+}
+
+/*=========================================================
+ Função para remover o livro de acordo com o isbn do proprio
+ Paramêtros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void removerLivro(TabelaHash *tabela, char *isbn) {
+    if (isbn==NULL) {
+        printf("O ISBN não foi digitado");
+        return;;
+    }
+    int cond = 0;
+    unsigned int posicao = hash(isbn);
+    TNo *novo = tabela->gavetas[posicao];
+    TNo *anterior = NULL;
+
+    while (novo !=NULL) {
+
+        if (strcmp(novo->chave,isbn) == 0) {
+            if (anterior == NULL) {
+                tabela->gavetas[posicao] = novo->proximo;
+            }
+            else {
+                anterior->proximo = novo->proximo;
+            }
+            free(novo);
+            printf("Livro removido com sucesso!!!");
+            cond=1;
+            return;
+        }
+
+        anterior = novo;
+        novo = novo->proximo;
+    }
+    if (cond ==0) {
+        printf("O livro com esse ISBN nao existe");
+    }
+}
+
+
+/*=========================================================
+ Função para verificar se não existe outro livro de exemplar diferente, com o mesmo ISBN
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ 3 - livro - para comparar com os livros que ja estaão guardados
+ 4 - posicao - para verificar a posicao do vetor
+ ==========================================================*/
+int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigned int posicao) {
+    TNo *novo = tabela->gavetas[posicao];
+    while (novo!=NULL) {
+
+        if (strcmp(novo->chave,isbn)==0 ) {
+
+            if (strcmp(livro.titulo, novo->livro.titulo) != 0) {
+                return 0;
+            }
+
+            return  1;
+        }
+        novo = novo->proximo;
+
+    }
+    return 1;
+}
+
+

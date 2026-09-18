@@ -1,3 +1,4 @@
+#include "../Libraries/biblioteca.h"
 #ifndef TABELAHASH_H
 #define TABELAHASH_H
 
@@ -7,7 +8,7 @@
 
 typedef struct TNo {
     char chave[TAM_CHAVE];
-    int dado;
+    TLivro livro;
     struct TNo *proximo;
 } TNo;
 
@@ -39,9 +40,9 @@ unsigned int hash(const char * chave);
     Parametros:
         1 - tabela - ponteiro para a tabela hash
         2 - chave - ponteiro para a chave
-        3 - valor - valor a ser inserido na tabela hash
+        3 - livro - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, int valor);
+void inserir(TabelaHash * const tabela, const char *isbn, TLivro livro);
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
@@ -60,4 +61,52 @@ void verificarMallocNO(TNo const * const no);
   =========================================================*/
 void verificarMallocTABELA(TabelaHash const * const tabela);
 
+/*=========================================================
+ Função para buscar um livro por ISBN na Tabela Hash
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - string com o ISBN procurado
+ =========================================================*/
+void buscarPorIsbn(TabelaHash const * const tabela, const char *isbn);
+
+
+/*=========================================================
+ Função para buscar livros por Título (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - titulo - string com o título (ou parte dele) procurado
+ =========================================================*/
+void buscarPorTitulo(TabelaHash const * const tabela, const char *titulo);
+
+/*=========================================================
+ Função para buscar livros por Autor (varredura na tabela)
+ Parâmetros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - autor - string com o autor (ou parte dele) procurado
+ =========================================================*/
+void buscarPorAutor(TabelaHash const * const tabela, const char *autor);
+
+/*=========================================================
+ Função para listar todos os livros contidos na tabela hash
+ Parâmetro:
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void listarLivro(TabelaHash *tabela);
+
+/*=========================================================
+ Função para remover o livro de acordo com o isbn do proprio
+ Paramêtros:
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void removerLivro(TabelaHash *tabela, char *isbn);
+
+/*=========================================================
+ Função para verificar se não existe outro livro de exemplar diferente, com o mesmo ISBN
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ 3 - livro - para comparar com os livros que ja estaão guardados
+ 4 - posicao - para verificar a posicao do vetor
+ ==========================================================*/
+int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigned int posicao);
 #endif
