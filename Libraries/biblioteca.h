@@ -39,9 +39,9 @@ void exibirMenuUsuarios();
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Empréstimos
     Parametros:
-        Nada
+        const tabela
   =========================================================*/
-void exibirMenuEmprestimos();
+void exibirMenuEmprestimos(TabelaHash * const tabela);
 
 /*=========================================================
     Função para exibir o sub-menu Consultas

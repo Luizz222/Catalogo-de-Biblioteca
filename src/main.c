@@ -23,7 +23,7 @@ int main(void){
             break;
 
         case 3:
-            exibirMenuEmprestimos();
+            exibirMenuEmprestimos(tabelaLivros);
             break;
         
         case 4:

@@ -6,8 +6,6 @@
 
 /*=========================================================
     Função para exibir o menu principal da biblioteca
-    Parametros:
-        Nada
   =========================================================*/
 void exibirMenuBiblioteca(){
     printf("\n================== MENU BIBLIOTECA ==================\n");
@@ -23,8 +21,6 @@ void exibirMenuBiblioteca(){
 
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Livros
-    Parametros:
-        1 - Ponteiro para a tabela hash
   =========================================================*/
 void exibirMenuLivros(TabelaHash * const tabela){
     int opcao = -1;
@@ -41,8 +37,7 @@ void exibirMenuLivros(TabelaHash * const tabela){
     printf("\n");
 
     switch(opcao){
-
-    case 1:
+    case 1: {
         TLivro livro;
 
         printf("\n========== CADASTRAR LIVRO ==========\n");
@@ -66,36 +61,33 @@ void exibirMenuLivros(TabelaHash * const tabela){
         livro.disponibilidade = 1;
 
         inserir(tabela, livro.isbn, livro);
-
-
         break;
+    }
 
-    case 2:
+    case 2: {
         char isbn[15];
         printf("Digite o isbn do livro que deseja excluir:\n");
         scanf("%14s", isbn);
         getchar();
-        removerLivro(tabela,isbn);
+        removerLivro(tabela, isbn);
         break;
+    }
+
     case 3:
         listarLivro(tabela);
-
         break;
 
     case 0:
-    printf("Retornando..\n");
-    return;
+        printf("Retornando..\n");
+        return;
 
     default:
         printf("\nOpcao invalida!\n");
     }
-
 }
 
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Usuários
-    Parametros:
-        Nada
   =========================================================*/
 void exibirMenuUsuarios(){
     int opcao = -1;
@@ -114,78 +106,68 @@ void exibirMenuUsuarios(){
 
     switch(opcao){
     case 1:
-        
         break;
-    
     case 2:
-        
         break;
-
     case 3:
-        
         break;
-
     case 4:
-        
         break;
-    
     case 0:
-    printf("Retornando..\n");
-    return;
-
+        printf("Retornando..\n");
+        return;
     default:
         printf("\nOpcao invalida!\n");
     }
 }
+
 /*=========================================================
     Função para exibir o sub-menu Gerenciar Empréstimos
-    Parametros:
-        Nada
   =========================================================*/
-void exibirMenuEmprestimos(){
+void exibirMenuEmprestimos(TabelaHash * const tabela) {
     int opcao = -1;
 
-    printf("\n================== GERENCIAR EMPRESTIMOS ==================\n");
-    printf("1. Realizar Emprestimo\n");
-    printf("2. Realizar Devolucao\n");
-    printf("3. Consultar Emprestimos Ativos\n");
-    printf("4. Consultar Historico de Emprestimos\n\n");
-
-    printf("0. Voltar\n\n");
-    printf("Escolha uma opcao: ");
-    scanf("%d", &opcao);
-    getchar();
-    printf("\n");
-
-    switch(opcao){
-    case 1:
+    do {
+        printf("\n================== GERENCIAR EMPRESTIMOS ==================\n");
+        printf("1. Realizar Emprestimo\n");
+        printf("2. Realizar Devolucao\n");
+        printf("3. Consultar Emprestimos Ativos\n\n");
+        printf("0. Voltar\n\n");
+        printf("Escolha uma opcao: ");
         
-        break;
-    case 2:
-        
-        break;
+        if (scanf("%d", &opcao) != 1) {
+            getchar();
+            continue;
+        }
+        getchar();
+        printf("\n");
 
-    case 3:
-        
-        break;
-
-    case 4:
-        
-        break;
-    
-    case 0:
-    printf("Retornando..\n");
-    return;
-
-    default:
-        printf("\nOpcao invalida!\n");
-    }
-
+        switch(opcao) {
+        case 1: {
+            char isbn[TAM_ISBN];
+            printf("Digite o ISBN do livro para emprestimo: ");
+            fgets(isbn, TAM_ISBN, stdin);
+            isbn[strcspn(isbn, "\n")] = '\0';
+            realizarEmprestimo(tabela, isbn);
+            break;
+        }
+        case 2: {
+            break;
+        }
+        case 3: {
+            break;
+        }
+        case 0:
+            printf("Retornando ao menu principal..\n");
+            break;
+        default:
+            printf("\nOpcao invalida!\n");
+        }
+    } while (opcao != 0);
 }
+
 /*=========================================================
     Função para exibir o sub-menu Consultas
-    Parametros:
-        Nada
   =========================================================*/
 void exibirMenuConsultas(TabelaHash * const tabela){
     int opcao = -1;
@@ -201,44 +183,48 @@ void exibirMenuConsultas(TabelaHash * const tabela){
     getchar();
     printf("\n");
 
-    switch(opcao){
-    case 1:
-        char isbn[TAM_ISBN];
-        printf("Digite o ISBN do livro: ");
-        fgets(isbn, TAM_ISBN, stdin);
-        isbn[strcspn(isbn, "\n")] = '\0';
-        buscarPorIsbn(tabela, isbn);
-        break;
+    switch(opcao) {
+        case 1: {
+            TLivro livro;
+            char isbn[TAM_ISBN];
+            printf("Digite o ISBN do livro: ");
+            fgets(isbn, TAM_ISBN, stdin);
+            isbn[strcspn(isbn, "\n")] = '\0';
+            buscarPorIsbn(tabela, isbn);
+            break;
+        }
 
-    case 2:
-        char titulo[TAM_TITULO];
-        printf("Digite o titulo do livro: ");
-        fgets(titulo, TAM_TITULO, stdin);
-        titulo[strcspn(titulo, "\n")] = '\0';
-        buscarPorTitulo(tabela, titulo);
-        break;
+        case 2: {
+            char isbn[15];
+            char titulo[TAM_TITULO];
+            printf("Digite o titulo do livro: ");
+            fgets(titulo, TAM_TITULO, stdin);
+            titulo[strcspn(titulo, "\n")] = '\0';
+            buscarPorTitulo(tabela, titulo);
+            break;
+        }
 
-    case 3:
-        char autor[TAM_AUTOR];
-        printf("Digite o nome do(a) autor(a) do livro: ");
-        fgets(autor, TAM_AUTOR, stdin);
-        autor[strcspn(autor, "\n")] = '\0';
-        buscarPorAutor(tabela, autor);
-        break;
+        case 3: {
+            char autor[TAM_AUTOR];
+            printf("Digite o nome do(a) autor(a) do livro: ");
+            fgets(autor, TAM_AUTOR, stdin);
+            autor[strcspn(autor, "\n")] = '\0';
+            buscarPorAutor(tabela, autor);
+            break;
+        }
 
-    case 0:
-    printf("Retornando..\n");
-    return;
-
-    default:
-        printf("\nOpcao invalida!\n");
+        case 0: {
+            printf("Retornando..\n");
+            return;
+        }
+        default: {
+            printf("\nOpcao invalida!\n");
+        }
     }
 }
 
 /*=========================================================
     Função para exibir o sub-menu Relatorios
-    Parametros:
-        Nada
   =========================================================*/
 void exibirMenuRelatorios(){
     int opcao = -1;
@@ -259,34 +245,21 @@ void exibirMenuRelatorios(){
 
     switch(opcao){
     case 1:
-        
         break;
-    
     case 2:
-        
         break;
-
     case 3:
-        
         break;
     case 4:
-        
         break;
-
     case 5:
-        
         break;
-
     case 6:
-
         break;
-        
     case 0:
-    printf("Retornando..\n");
-    return;
-
+        printf("Retornando..\n");
+        return;
     default:
         printf("\nOpcao invalida!\n");
     }
 }
-

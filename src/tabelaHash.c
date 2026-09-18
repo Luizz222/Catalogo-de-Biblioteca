@@ -35,6 +35,7 @@ unsigned int hash(const char *chave) {
     }
     return (unsigned int) (h % TAM_TABELA);
 }
+
 /*=========================================================
     Função para inserir um dado na tabela hash
     Parametros:
@@ -72,8 +73,6 @@ void inserir(TabelaHash * const tabela, const char *isbn, TLivro livro) {
     printf("Inserido: \"%s\" -> %s na gaveta %u\n", isbn, livro.titulo, posicao);
     printf("\nLivro cadastrado com sucesso!\n");
 }
-
-
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
@@ -248,6 +247,7 @@ void listarLivro(TabelaHash *tabela) {
 
 }
 
+
 /*=========================================================
  Função para remover o livro de acordo com o isbn do proprio
  Paramêtros:
@@ -282,11 +282,10 @@ void removerLivro(TabelaHash *tabela, char *isbn) {
         anterior = novo;
         novo = novo->proximo;
     }
-    if (cond ==0) {
+    if (cond== 0) {
         printf("O livro com esse ISBN nao existe");
     }
 }
-
 
 /*=========================================================
  Função para verificar se não existe outro livro de exemplar diferente, com o mesmo ISBN
@@ -312,5 +311,79 @@ int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigne
     }
     return 1;
 }
+/*=========================================================
+    Função para realizar o empréstimo de um livro (marca como 0)
+  =========================================================*/
+void realizarEmprestimo(TabelaHash *tabela, const char *isbn) {
+    if (isbn == NULL || strlen(isbn) == 0) {
+        printf("Erro: ISBN invalido.\n");
+        return;
+    }
 
+    unsigned int posicao = hash(isbn);
+    TNo *atual = tabela->gavetas[posicao];
 
+    while (atual != NULL) {
+        if (strcmp(atual->livro.isbn, isbn) == 0) {
+            if (atual->livro.disponibilidade == 0) {
+                printf("Aviso: O livro \"%s\" ja esta emprestado!\n", atual->livro.titulo);
+                return;
+            }
+            atual->livro.disponibilidade = 0;
+            printf("\nEmprestimo realizado com sucesso para o livro: \"%s\"\n", atual->livro.titulo);
+            return; // Retorna para o menu de empréstimos, sem fechar o programa
+        }
+        atual = atual->proximo;
+    }
+
+    printf("\nErro: Livro com ISBN \"%s\" nao foi encontrado no acervo.\n", isbn);
+}
+
+/*=========================================================
+    Função para realizar a devolução de um livro (marca como 1)
+  =========================================================*/
+void realizarDevolucao(TabelaHash *tabela, const char *isbn) {
+    unsigned int posicao = hash(isbn);
+    TNo *atual = tabela->gavetas[posicao];
+
+    while (atual != NULL) {
+        if (strcmp(atual->livro.isbn, isbn) == 0) {
+            if (atual->livro.disponibilidade == 1) {
+                printf("Erro: O livro \"%s\" ja esta disponivel no acervo!\n", atual->livro.titulo);
+                return;
+            }
+            atual->livro.disponibilidade = 1;
+            printf("Devolucao realizada com sucesso para o livro: \"%s\"\n", atual->livro.titulo);
+            return;
+        }
+        atual = atual->proximo;
+    }
+    printf("Erro: Livro com ISBN %s nao encontrado.\n", isbn);
+}
+
+/*=========================================================
+    Função para listar apenas os empréstimos ativos (disponibilidade == 0)
+  =========================================================*/
+void consultarEmprestimosAtivos(TabelaHash const * const tabela) {
+    int encontrados = 0;
+    printf("\n================ LIVROS EMPRESTADOS (ATIVOS) ================\n\n");
+
+    for (int i = 0; i < TAM_TABELA; i++) {
+        TNo *atual = tabela->gavetas[i];
+        while (atual != NULL) {
+            if (atual->livro.disponibilidade == 0) {
+                printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao);
+                encontrados++;
+            }
+            atual = atual->proximo;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro esta emprestado no momento.\n");
+    }
+}
