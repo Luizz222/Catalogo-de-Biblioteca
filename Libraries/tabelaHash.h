@@ -116,4 +116,11 @@ int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigne
  2 - isbn - chave isbn para procurar pelo livro
  ==========================================================*/
 void realizarEmprestimo(TabelaHash *tabela, const char *isbn);
+
+/*=========================================================
+ Função para realizar uma devolucao pelo isbn
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void realizarDevolucao(TabelaHash *tabela, const char *isbn);
 #endif

@@ -152,6 +152,11 @@ void exibirMenuEmprestimos(TabelaHash * const tabela) {
             break;
         }
         case 2: {
+            char isbn[TAM_ISBN];
+            printf("Digite o ISBN do livro para devolucao: ");
+            fgets(isbn, TAM_ISBN, stdin);
+            isbn[strcspn(isbn, "\n")] = '\0';
+            realizarDevolucao(tabela, isbn);
             break;
         }
         case 3: {
