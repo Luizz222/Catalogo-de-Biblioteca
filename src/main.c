@@ -19,18 +19,14 @@ int main(void){
             break;
 
         case 2:
-            exibirMenuUsuarios();
-            break;
-
-        case 3:
             exibirMenuEmprestimos(tabelaLivros);
             break;
         
-        case 4:
+        case 3:
             exibirMenuConsultas(tabelaLivros);
             break;
 
-        case 5:
+        case 4:
             exibirMenuRelatorios();
             break;
 

@@ -360,3 +360,31 @@ void realizarDevolucao(TabelaHash *tabela, const char *isbn) {
     }
     printf("Erro: Livro com ISBN %s nao encontrado.\n", isbn);
 }
+
+
+/*=========================================================
+    Função para listar apenas os empréstimos ativos (disponibilidade == 0)
+  =========================================================*/
+void consultarEmprestimosAtivos(TabelaHash const * const tabela) {
+    int encontrados = 0;
+    printf("\n================ LIVROS EMPRESTADOS (ATIVOS) ================\n\n");
+
+    for (int i = 0; i < TAM_TABELA; i++) {
+        TNo *atual = tabela->gavetas[i];
+        while (atual != NULL) {
+            if (atual->livro.disponibilidade == 0) {
+                printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao);
+                encontrados++;
+            }
+            atual = atual->proximo;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro esta emprestado no momento.\n");
+    }
+}

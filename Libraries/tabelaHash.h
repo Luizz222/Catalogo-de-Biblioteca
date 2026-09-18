@@ -123,4 +123,11 @@ void realizarEmprestimo(TabelaHash *tabela, const char *isbn);
  2 - isbn - chave isbn para procurar pelo livro
  ==========================================================*/
 void realizarDevolucao(TabelaHash *tabela, const char *isbn);
+
+/*=========================================================
+ Função para listar todos os emprestimos ativos
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - ponteiro constante para a tabela
+ ==========================================================*/
+void consultarEmprestimosAtivos(TabelaHash const * const tabela);
 #endif

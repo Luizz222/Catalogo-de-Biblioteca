@@ -10,10 +10,9 @@
 void exibirMenuBiblioteca(){
     printf("\n================== MENU BIBLIOTECA ==================\n");
     printf("1. Gerenciar Livros\n");
-    printf("2. Gerenciar Usuarios\n");
-    printf("3. Gerenciar Emprestimos\n");
-    printf("4. Realizar Consulta de Livros\n");
-    printf("5. Relatorios\n\n");
+    printf("2. Gerenciar Emprestimos\n");
+    printf("3. Realizar Consulta de Livros\n");
+    printf("4. Relatorios\n\n");
 
     printf("0. Encerrar o Programa\n\n");
     printf("Escolha uma opcao: ");
@@ -87,41 +86,6 @@ void exibirMenuLivros(TabelaHash * const tabela){
 }
 
 /*=========================================================
-    Função para exibir o sub-menu Gerenciar Usuários
-  =========================================================*/
-void exibirMenuUsuarios(){
-    int opcao = -1;
-
-    printf("\n============== GERENCIAR USUARIOS ==============\n");
-    printf("1. Cadastrar Usuario\n");
-    printf("2. Alterar Usuario\n");
-    printf("3. Remover Usuario\n");
-    printf("4. Listar Usuarios\n\n");
-
-    printf("0. Voltar\n\n");
-    printf("Escolha uma opcao: ");
-    scanf("%d", &opcao);
-    getchar();
-    printf("\n");
-
-    switch(opcao){
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 0:
-        printf("Retornando..\n");
-        return;
-    default:
-        printf("\nOpcao invalida!\n");
-    }
-}
-
-/*=========================================================
     Função para exibir o sub-menu Gerenciar Empréstimos
   =========================================================*/
 void exibirMenuEmprestimos(TabelaHash * const tabela) {
@@ -160,6 +124,7 @@ void exibirMenuEmprestimos(TabelaHash * const tabela) {
             break;
         }
         case 3: {
+            consultarEmprestimosAtivos(tabela);
             break;
         }
         case 0:
@@ -236,11 +201,10 @@ void exibirMenuRelatorios(){
 
     printf("\n================== RELATORIOS ==================\n");
     printf("1. Listar Todos os Livros\n");
-    printf("2. Listar Todos os Usuarios\n");
-    printf("3. Listar Emprestimos Ativos\n");
-    printf("4. Listar Historico de Emprestimos\n");
-    printf("5. Listar Livros Disponiveis\n");
-    printf("6. Listar Livros Emprestados\n\n");
+    printf("2. Listar Emprestimos Ativos\n");
+    printf("3. Listar Historico de Emprestimos\n");
+    printf("4. Listar Livros Disponiveis\n");
+    printf("5. Listar Livros Emprestados\n\n");
 
     printf("0. Voltar\n\n");
     printf("Escolha uma opcao: ");
