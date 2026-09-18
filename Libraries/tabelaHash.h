@@ -40,9 +40,9 @@ unsigned int hash(const char * chave);
     Parametros:
         1 - tabela - ponteiro para a tabela hash
         2 - chave - ponteiro para a chave
-        3 - valor - valor a ser inserido na tabela hash
+        3 - livro - valor a ser inserido na tabela hash
   =========================================================*/
-void inserir(TabelaHash * const tabela, const char *chave, TLivro livro);
+void inserir(TabelaHash * const tabela, const char *isbn, TLivro livro);
 
 /*=========================================================
     Função para verificar se a alocação dinâmica ocorreu
@@ -100,4 +100,13 @@ void listarLivro(TabelaHash *tabela);
  2 - isbn - chave isbn para procurar pelo livro
  ==========================================================*/
 void removerLivro(TabelaHash *tabela, char *isbn);
+
+/*=========================================================
+ Função para verificar se não existe outro livro de exemplar diferente, com o mesmo ISBN
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ 3 - livro - para comparar com os livros que ja estaão guardados
+ 4 - posicao - para verificar a posicao do vetor
+ ==========================================================*/
+int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigned int posicao);
 #endif

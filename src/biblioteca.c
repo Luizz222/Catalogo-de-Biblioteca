@@ -67,7 +67,7 @@ void exibirMenuLivros(TabelaHash * const tabela){
 
         inserir(tabela, livro.isbn, livro);
 
-        printf("\nLivro cadastrado com sucesso!\n");
+
         break;
 
     case 2:
