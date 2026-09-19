@@ -27,7 +27,7 @@ int main(void){
             break;
 
         case 4:
-            exibirMenuRelatorios();
+            exibirMenuRelatorios(tabelaLivros);
             break;
 
         case 0:

@@ -130,4 +130,10 @@ void realizarDevolucao(TabelaHash *tabela, const char *isbn);
  2 - ponteiro constante para a tabela
  ==========================================================*/
 void consultarEmprestimosAtivos(TabelaHash const * const tabela);
+
+/*=========================================================
+ Função para listar todos os livros disponiveis
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void listarLivrosDisponiveis(TabelaHash *tabela);
 #endif

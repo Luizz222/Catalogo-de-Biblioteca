@@ -91,7 +91,7 @@ void exibirMenuLivros(TabelaHash * const tabela){
 void exibirMenuEmprestimos(TabelaHash * const tabela) {
     int opcao = -1;
 
-    do {
+
         printf("\n================== GERENCIAR EMPRESTIMOS ==================\n");
         printf("1. Realizar Emprestimo\n");
         printf("2. Realizar Devolucao\n");
@@ -101,7 +101,7 @@ void exibirMenuEmprestimos(TabelaHash * const tabela) {
         
         if (scanf("%d", &opcao) != 1) {
             getchar();
-            continue;
+
         }
         getchar();
         printf("\n");
@@ -133,7 +133,7 @@ void exibirMenuEmprestimos(TabelaHash * const tabela) {
         default:
             printf("\nOpcao invalida!\n");
         }
-    } while (opcao != 0);
+
 }
 
 /*=========================================================
@@ -196,15 +196,12 @@ void exibirMenuConsultas(TabelaHash * const tabela){
 /*=========================================================
     Função para exibir o sub-menu Relatorios
   =========================================================*/
-void exibirMenuRelatorios(){
+void exibirMenuRelatorios(TabelaHash * const tabela){
     int opcao = -1;
 
     printf("\n================== RELATORIOS ==================\n");
-    printf("1. Listar Todos os Livros\n");
-    printf("2. Listar Emprestimos Ativos\n");
-    printf("3. Listar Historico de Emprestimos\n");
-    printf("4. Listar Livros Disponiveis\n");
-    printf("5. Listar Livros Emprestados\n\n");
+    printf("1. Listar Livros Disponiveis\n");
+    printf("2. Listar Livros Emprestados\n\n");
 
     printf("0. Voltar\n\n");
     printf("Escolha uma opcao: ");
@@ -214,16 +211,10 @@ void exibirMenuRelatorios(){
 
     switch(opcao){
     case 1:
+        listarLivrosDisponiveis(tabela);
         break;
     case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
-    case 6:
+        consultarEmprestimosAtivos(tabela);
         break;
     case 0:
         printf("Retornando..\n");
