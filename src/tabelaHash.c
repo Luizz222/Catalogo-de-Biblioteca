@@ -388,3 +388,27 @@ void consultarEmprestimosAtivos(TabelaHash const * const tabela) {
         printf("Nenhum livro esta emprestado no momento.\n");
     }
 }
+
+void listarLivrosDisponiveis(TabelaHash *tabela) {
+    int encontrados = 0;
+    printf("\n================ LIVROS DISPONIVEIS ================\n\n");
+
+    for (int i = 0; i < TAM_TABELA; i++) {
+        TNo *atual = tabela->gavetas[i];
+        while (atual != NULL) {
+            if (atual->livro.disponibilidade == 1) {
+                printf("ISBN: %s | Titulo: %s | Autor: %s | Ano: %s\n",
+                       atual->livro.isbn,
+                       atual->livro.titulo,
+                       atual->livro.autor,
+                       atual->livro.anoPublicacao);
+                encontrados++;
+            }
+            atual = atual->proximo;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro ativo no momento.\n");
+    }
+}
