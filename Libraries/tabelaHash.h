@@ -109,4 +109,25 @@ void removerLivro(TabelaHash *tabela, char *isbn);
  4 - posicao - para verificar a posicao do vetor
  ==========================================================*/
 int verificarIsbn(TabelaHash const *tabela,const char *isbn,TLivro livro,unsigned int posicao);
+
+/*=========================================================
+ Função para realizar um empréstimo
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void realizarEmprestimo(TabelaHash *tabela, const char *isbn);
+
+/*=========================================================
+ Função para realizar uma devolucao pelo isbn
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - isbn - chave isbn para procurar pelo livro
+ ==========================================================*/
+void realizarDevolucao(TabelaHash *tabela, const char *isbn);
+
+/*=========================================================
+ Função para listar todos os emprestimos ativos
+ 1 - tabela - ponteiro para a tabela hash
+ 2 - ponteiro constante para a tabela
+ ==========================================================*/
+void consultarEmprestimosAtivos(TabelaHash const * const tabela);
 #endif
