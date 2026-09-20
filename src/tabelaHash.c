@@ -418,3 +418,4 @@ void listarLivrosDisponiveis(TabelaHash *tabela) {
         printf("Nenhum livro ativo no momento.\n");
     }
 }
+

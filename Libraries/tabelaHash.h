@@ -136,4 +136,6 @@ void consultarEmprestimosAtivos(TabelaHash const * const tabela);
  1 - tabela - ponteiro para a tabela hash
  ==========================================================*/
 void listarLivrosDisponiveis(TabelaHash *tabela);
+
+
 #endif
