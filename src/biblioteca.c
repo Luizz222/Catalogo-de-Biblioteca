@@ -13,7 +13,6 @@ void exibirMenuBiblioteca(){
     printf("2. Gerenciar Emprestimos\n");
     printf("3. Realizar Consulta de Livros\n");
     printf("4. Relatorios\n\n");
-
     printf("0. Encerrar o Programa\n\n");
     printf("Escolha uma opcao: ");
 }
@@ -202,7 +201,7 @@ void exibirMenuRelatorios(TabelaHash * const tabela){
     printf("\n================== RELATORIOS ==================\n");
     printf("1. Listar Livros Disponiveis\n");
     printf("2. Listar Livros Emprestados\n\n");
-
+    printf("3. Dados estatisticos da tabela hash\n\n");
     printf("0. Voltar\n\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
@@ -215,6 +214,9 @@ void exibirMenuRelatorios(TabelaHash * const tabela){
         break;
     case 2:
         consultarEmprestimosAtivos(tabela);
+        break;
+    case 3:
+        medicao(tabela);
         break;
     case 0:
         printf("Retornando..\n");

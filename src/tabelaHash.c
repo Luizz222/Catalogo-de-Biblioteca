@@ -395,6 +395,10 @@ void consultarEmprestimosAtivos(TabelaHash const * const tabela) {
     }
 }
 
+/*=========================================================
+ Função para listar todos os livros disponiveis
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
 void listarLivrosDisponiveis(TabelaHash *tabela) {
     int encontrados = 0;
     printf("\n================ LIVROS DISPONIVEIS ================\n\n");
@@ -418,3 +422,58 @@ void listarLivrosDisponiveis(TabelaHash *tabela) {
         printf("Nenhum livro ativo no momento.\n");
     }
 }
+
+
+/*=========================================================
+ Função para Exibir colisao, carga,e comprimento medio
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void medicao(TabelaHash* tabela) {
+    int total_elementos = 0;
+    int posicoes_ocupadas = 0;
+    int num_colisoes = 0;
+
+    // Percorre cada posição do vetor da tabela hash
+    for (int i = 0; i < TAM_TABELA; i++) {
+        // Acessa o nó inicial da lista na posição i através do ponteiro da struct.
+        // NOTA: Se na sua struct o nome do vetor for diferente de 'tabela',
+        // altere 'tabela->tabela[i]' para 'tabela->vetor[i]' ou 'tabela->itens[i]'.
+        TNo* atual = tabela->gavetas[i];
+
+        if (atual != NULL) {
+            posicoes_ocupadas++; // Encontrou uma posição ocupada
+
+            // Contar quantos elementos existem nesta lista encadeada específica
+            int elementos_na_lista = 0;
+
+            while (atual != NULL) {
+                elementos_na_lista++;
+                atual = atual->proximo;
+            }
+
+            // Acumula o total global de elementos
+            total_elementos += elementos_na_lista;
+
+            // Se a lista tem mais de 1 elemento, os excedentes são colisões
+            if (elementos_na_lista > 1) {
+                num_colisoes += (elementos_na_lista - 1);
+            }
+        }
+    }
+
+    // Cálculos das métricas (item 5)
+    float fator_carga = (float)total_elementos / TAM_TABELA;
+    float comp_medio = (posicoes_ocupadas > 0) ? ((float)total_elementos / posicoes_ocupadas) : 0.0f;
+
+    // Exibição do relatório
+    printf("\n===============================================\n");
+    printf("   ANÁLISE DAS MÉTRICAS DA HASH (Tamanho = %d)\n", TAM_TABELA);
+    printf("===============================================\n");
+    printf(" Total de Elementos (N)        : %d\n", total_elementos);
+    printf(" Posições Ocupadas no Vetor    : %d\n", posicoes_ocupadas);
+    printf(" Número de Colisões            : %d\n", num_colisoes);
+    printf(" Fator de Carga (alpha)        : %.2f\n", fator_carga);
+    printf(" Comprimento Médio das Listas  : %.2f\n", comp_medio);
+    printf("===============================================\n");
+}
+

@@ -136,4 +136,10 @@ void consultarEmprestimosAtivos(TabelaHash const * const tabela);
  1 - tabela - ponteiro para a tabela hash
  ==========================================================*/
 void listarLivrosDisponiveis(TabelaHash *tabela);
+
+/*=========================================================
+ Função para Exibir colisao, carga,e comprimento medio
+ 1 - tabela - ponteiro para a tabela hash
+ ==========================================================*/
+void medicao(TabelaHash* tabela);
 #endif
