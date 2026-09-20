@@ -427,15 +427,14 @@ void listarLivrosDisponiveis(TabelaHash *tabela) {
 /*=========================================================
  Função para Exibir colisao, carga,e comprimento medio
  1 - tabela - ponteiro para a tabela hash
- 2 - M - Tamanho do vetor
  ==========================================================*/
-void medicao(TabelaHash* tabela, int M) {
+void medicao(TabelaHash* tabela) {
     int total_elementos = 0;
     int posicoes_ocupadas = 0;
     int num_colisoes = 0;
 
     // Percorre cada posição do vetor da tabela hash
-    for (int i = 0; i < M; i++) {
+    for (int i = 0; i < TAM_TABELA; i++) {
         // Acessa o nó inicial da lista na posição i através do ponteiro da struct.
         // NOTA: Se na sua struct o nome do vetor for diferente de 'tabela',
         // altere 'tabela->tabela[i]' para 'tabela->vetor[i]' ou 'tabela->itens[i]'.
@@ -463,12 +462,12 @@ void medicao(TabelaHash* tabela, int M) {
     }
 
     // Cálculos das métricas (item 5)
-    float fator_carga = (float)total_elementos / M;
+    float fator_carga = (float)total_elementos / TAM_TABELA;
     float comp_medio = (posicoes_ocupadas > 0) ? ((float)total_elementos / posicoes_ocupadas) : 0.0f;
 
     // Exibição do relatório
     printf("\n===============================================\n");
-    printf("   ANÁLISE DAS MÉTRICAS DA HASH (Tamanho M = %d)\n", M);
+    printf("   ANÁLISE DAS MÉTRICAS DA HASH (Tamanho = %d)\n", TAM_TABELA);
     printf("===============================================\n");
     printf(" Total de Elementos (N)        : %d\n", total_elementos);
     printf(" Posições Ocupadas no Vetor    : %d\n", posicoes_ocupadas);
